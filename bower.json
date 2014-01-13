@@ -1,0 +1,21 @@
+{
+  "name": "dojo-ckeditor",
+  "version": "0.0.0",
+  "authors": [
+    "Milotskiy Alexey <spalaxinco@gmail.com>"
+  ]
+  ,
+  "license": "MIT",
+  
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+
+  "dependencies": {
+      "ckeditor": "*"
+  }
+}
