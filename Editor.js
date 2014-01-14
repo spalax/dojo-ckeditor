@@ -49,11 +49,20 @@ define([
 
             _getEditorAttr: function () {
                 try {
-
                     return CKEDITOR.instances[this.id];
                 } catch (e) {
                      console.error(this.declaredClass, arguments, e);
                      throw e;
+                }
+            },
+
+            _setValueAttr: function (value) {
+                try {
+                    this.get('editor').setData(value);
+                    this.inherited(arguments);
+                } catch (e) {
+                    console.error(this.declaredClass+" "+arguments.callee.nom, arguments, e);
+                    throw e;
                 }
             },
 
