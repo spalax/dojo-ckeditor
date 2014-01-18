@@ -1,6 +1,6 @@
 {
   "name": "dojo-ckeditor",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "authors": [
     "Milotskiy Alexey <spalaxinco@gmail.com>"
   ]
@@ -16,6 +16,6 @@
   ],
 
   "dependencies": {
-      "ckeditor": "*"
+      "ckeditor": ">=4.3.1"
   }
 }
