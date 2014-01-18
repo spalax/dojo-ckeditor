@@ -87,6 +87,16 @@ define([
                 }
             },
 
+            destroy: function () {
+                try {
+                    this.get('editor').destroy();
+                    this.inherited(arguments);
+                } catch (e) {
+                     console.error(this.declaredClass, arguments, e);
+                     throw e;
+                }
+            },
+
             _getValueAttr: function () {
                 try {
                     return string.trim(this.get('editor').getData());
