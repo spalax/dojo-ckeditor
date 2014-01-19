@@ -25,21 +25,24 @@ define([
                         id: this.id
                     }, this.settings));
 
-                    this.get('editor').on('instanceReady', lang.hitch(this, function (){
+                    this.editor = CKEDITOR.instances[this.id];
+
+                    this.editor.on('instanceReady', lang.hitch(this, function (){
                         this.emit('ready', this);
                     }));
 
-                    this.get('editor').on('change', lang.hitch(this, function (){
+                    this.editor.on('change', lang.hitch(this, function (){
                         this._handleOnChange(this.get('value'));
                     }));
 
-                    this.get('editor').on('blur', lang.hitch(this, function (){
+                    this.editor.on('blur', lang.hitch(this, function (){
                         this._onBlur();
                     }));
 
-                    this.get('editor').on('focus', lang.hitch(this, function (){
+                    this.editor.on('focus', lang.hitch(this, function (){
                         this._onFocus();
                     }));
+
                 } catch (e) {
                     console.error(this.declaredClass, arguments, e);
                     throw e;
@@ -49,16 +52,7 @@ define([
             focus: function () {
                 try {
                     this.inherited(arguments);
-                    this.get('editor').focus();
-                } catch (e) {
-                     console.error(this.declaredClass, arguments, e);
-                     throw e;
-                }
-            },
-
-            _getEditorAttr: function () {
-                try {
-                    return CKEDITOR.instances[this.id];
+                    this.editor.focus();
                 } catch (e) {
                      console.error(this.declaredClass, arguments, e);
                      throw e;
@@ -77,7 +71,7 @@ define([
                     this.__lock = true;
 
                     var inherited = lang.hitch(this, 'inherited', arguments);
-                    this.get('editor').setData(value || '', lang.hitch(this, function (){
+                    this.editor.setData(value || '', lang.hitch(this, function (){
                         this.__lock = false;
                         inherited();
                     }));
@@ -89,7 +83,7 @@ define([
 
             destroy: function () {
                 try {
-                    this.get('editor').destroy();
+                    this.editor && this.editor.destroy();
                     this.inherited(arguments);
                 } catch (e) {
                      console.error(this.declaredClass, arguments, e);
@@ -99,7 +93,7 @@ define([
 
             _getValueAttr: function () {
                 try {
-                    return string.trim(this.get('editor').getData());
+                    return string.trim(this.editor.getData());
                 } catch (e) {
                     console.error(this.declaredClass+" "+arguments.callee.nom, arguments, e);
                     throw e;
