@@ -7,10 +7,12 @@ define([
     "dijit/form/_FormValueWidget",
     "dojo/text!./templates/Editor.html",
     "ckeditor/ckeditor"
-],
-    function(declare, lang, string, _Widget, _TemplatedMixin, _FormValueWidget, templateEditor){
+    ],
+    function(declare, lang, string, _Widget,
+             _TemplatedMixin, _FormValueWidget, templateEditor){
 
-        return declare("dojo-ckeditor.Editor", [ _Widget, _TemplatedMixin, _FormValueWidget], {
+        return declare("dojo-ckeditor.Editor",
+                       [ _Widget, _TemplatedMixin, _FormValueWidget], {
             cols: 80,
             rows: 10,
             settings: {},
@@ -42,6 +44,12 @@ define([
                     this.editor.on('focus', lang.hitch(this, function (){
                         this._onFocus();
                     }));
+
+                    // Copy value from srcNodeRef, unless user specified a value explicitly (or there is no srcNodeRef)
+                    // TODO: parser will handle this in 2.0
+                    if(!this.value && this.srcNodeRef){
+                        this.set('value', this.srcNodeRef.value);
+                    }
 
                 } catch (e) {
                     console.error(this.declaredClass, arguments, e);
