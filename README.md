@@ -21,3 +21,29 @@ define(["dojo-ckeditor/Editor"], function (Editor) {
     // You will have CKEditor functionality under "Editor" variable
 })
 ```
+
+### Known issue
+
+If you will use Editor declaratively, with async:false, and parseOnLoad:true then you might need set CKEDITOR_BASEPATH to the global scope:
+
+```javascript
+    var CKEDITOR_BASEPATH = '/base_path_to/ckeditor/';
+```
+
+but you can avoid it if you will configure dojo like this :
+
+```html
+<script type="text/javascript">
+    dojoConfig = {
+        async: true,
+        parseOnLoad: true,
+    };
+
+</script>
+
+<script type="text/javascript" src="/base_path_to/dojo.js"></script>
+
+<script type="text/javascript">
+    require(["dojo/parser"]);
+</script>
+```
