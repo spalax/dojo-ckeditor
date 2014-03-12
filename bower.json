@@ -16,6 +16,6 @@
   ],
 
   "dependencies": {
-      "ckeditor": "*"
+      "ckeditor": "https://github.com/spalax/ckeditor-releases.git#possibilities_to_compile_as_part_of_dojo_toolkit_application"
   }
 }
