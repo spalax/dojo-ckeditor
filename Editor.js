@@ -30,7 +30,10 @@ define([
                     this.editor = CKEDITOR.instances[this.id];
 
                     this.editor.on('instanceReady', lang.hitch(this, function (){
+                        // Will be deleted soon
                         this.emit('ready', this);
+
+                        this.emit('dojo-ckeditor-ready', this);
                     }));
 
                     this.editor.on('change', lang.hitch(this, function (){
